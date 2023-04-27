@@ -47,6 +47,16 @@ public class EmpleadoPorComision extends Empleado {
     public void setSalario(double salario) {
         this.salario = salario;
     }
+
+    @Override
+    public double calcularSalario() {
+        return salario + (totalDeVentas*(porcentajeComision/100));
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nEmpleadoPorComision{" + "totalDeVentas=" + totalDeVentas + ", porcentajeComision=" + porcentajeComision + ", salario=" + salario + '}';
+    }
     
     
 

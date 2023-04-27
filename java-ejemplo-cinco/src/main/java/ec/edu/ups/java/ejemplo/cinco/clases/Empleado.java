@@ -5,6 +5,7 @@
 package ec.edu.ups.java.ejemplo.cinco.clases;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -109,6 +110,40 @@ public class Empleado {
     public double calcularSalario(){
         return 0.00;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.cedula);
+        return hash;
+    }
+
     
+    @Override
+    public boolean equals(Object obj) {        
+        if (obj == null) {
+            return false;
+        }
+        //if (this.getClass() != obj.getClass()) {
+        //    return false;
+        //}
+        if(!(obj instanceof EmpleadoAsalariado) && 
+                !(obj instanceof EmpleadoPorComision) &&
+                !(obj instanceof EmpleadoPorHoras) ){
+            return false;
+        }
+        final Empleado other = (Empleado) obj;        
+        if(!this.cedula.equals(other.cedula))
+            return false;
+        
+        return true;
+    }
+
+    
+    
+    @Override
+    public String toString() {
+        return "Empleado{" + "cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaDeNacimiento=" + fechaDeNacimiento + ", telefono=" + telefono + ", direccion=" + direccion + ", cargo=" + cargo + '}';
+    }    
     
 }
