@@ -10,7 +10,7 @@ package ec.edu.ups.java.ejemplo.seis.clases;
  */
 public class Circulo extends Figura{
     
-    public double radio;
+    private double radio;
 
     public Circulo(double radio, String tipo) {
         super(tipo);
