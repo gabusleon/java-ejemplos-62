@@ -10,6 +10,8 @@ package ec.edu.ups.java.ejemplo.diez.vista;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    private VentanaCrearPersona ventanaCrearPersona;    
+
     /**
      * Creates new form VentanaPrincipal
      */
@@ -62,6 +64,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemCrearPersona.setMnemonic('o');
         menuItemCrearPersona.setText("Crear");
+        menuItemCrearPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCrearPersonaActionPerformed(evt);
+            }
+        });
         menuPersona.add(menuItemCrearPersona);
 
         menuItemActualizarPersona.setMnemonic('s');
@@ -94,20 +101,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemBuscarOperadora.setMnemonic('p');
         menuItemBuscarOperadora.setText("Buscar");
-        menuItemBuscarOperadora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemBuscarOperadoraActionPerformed(evt);
-            }
-        });
         menuOperadora.add(menuItemBuscarOperadora);
 
         menuItemEliminarOperadora.setMnemonic('d');
         menuItemEliminarOperadora.setText("Eliminar");
-        menuItemEliminarOperadora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemEliminarOperadoraActionPerformed(evt);
-            }
-        });
         menuOperadora.add(menuItemEliminarOperadora);
 
         menuItemListarOperadora.setText("Listar");
@@ -157,28 +154,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuItemEliminarOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEliminarOperadoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuItemEliminarOperadoraActionPerformed
-
-    private void menuItemBuscarOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBuscarOperadoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuItemBuscarOperadoraActionPerformed
-
     private void menuItemSalirOpcionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalirOpcionesActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuItemSalirOpcionesActionPerformed
+
+    private void menuItemCrearPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCrearPersonaActionPerformed
+        if (ventanaCrearPersona == null) {
+            ventanaCrearPersona = new VentanaCrearPersona();
+            desktopPane.add(ventanaCrearPersona);
+        }
+        
+        ventanaCrearPersona.setVisible(true);
+    }//GEN-LAST:event_menuItemCrearPersonaActionPerformed
 
     /**
      * @param args the command line arguments
