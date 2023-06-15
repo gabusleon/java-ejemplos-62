@@ -4,19 +4,31 @@
  */
 package ec.edu.ups.java.ejemplo.diez.vista;
 
+import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
+import ec.edu.ups.java.ejemplo.diez.dao.PersonaDAO;
+import ec.edu.ups.java.ejemplo.diez.idao.IPersonaDAO;
+
 /**
  *
  * @author PhD. Gabriel A. León Paredes
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    private VentanaCrearPersona ventanaCrearPersona;    
+    //ventanas
+    private VentanaCrearPersona ventanaCrearPersona; 
+    private VentanaBuscarPersona ventanaBuscarPersona;
+    //controladores
+    private PersonaControlador personaControlador;
+    //DAOs
+    private IPersonaDAO personaDAO;
 
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        personaDAO = new PersonaDAO();
+        personaControlador = new PersonaControlador(personaDAO);
     }
 
     /**
@@ -34,20 +46,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         menuPersona = new javax.swing.JMenu();
         menuItemCrearPersona = new javax.swing.JMenuItem();
-        menuItemActualizarPersona = new javax.swing.JMenuItem();
         menuItemBuscarPersona = new javax.swing.JMenuItem();
+        menuItemActualizarPersona = new javax.swing.JMenuItem();
         menuItemEliminarPersona = new javax.swing.JMenuItem();
         menuItemListarPersona = new javax.swing.JMenuItem();
         menuOperadora = new javax.swing.JMenu();
         menuItemCrearOperadora = new javax.swing.JMenuItem();
-        menuItemActualizarOperadora = new javax.swing.JMenuItem();
         menuItemBuscarOperadora = new javax.swing.JMenuItem();
+        menuItemActualizarOperadora = new javax.swing.JMenuItem();
         menuItemEliminarOperadora = new javax.swing.JMenuItem();
         menuItemListarOperadora = new javax.swing.JMenuItem();
         menuTelefono = new javax.swing.JMenu();
         menuItemCrearTelefono = new javax.swing.JMenuItem();
-        menuItemActualizarTelefono = new javax.swing.JMenuItem();
         menuItemBuscarTelefono = new javax.swing.JMenuItem();
+        menuItemActualizarTelefono = new javax.swing.JMenuItem();
         menuItemEliminarTelefono = new javax.swing.JMenuItem();
         menuItemListarTelefono = new javax.swing.JMenuItem();
         menuOpciones = new javax.swing.JMenu();
@@ -71,13 +83,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         menuPersona.add(menuItemCrearPersona);
 
+        menuItemBuscarPersona.setMnemonic('a');
+        menuItemBuscarPersona.setText("Buscar");
+        menuItemBuscarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemBuscarPersonaActionPerformed(evt);
+            }
+        });
+        menuPersona.add(menuItemBuscarPersona);
+
         menuItemActualizarPersona.setMnemonic('s');
         menuItemActualizarPersona.setText("Actualizar");
         menuPersona.add(menuItemActualizarPersona);
-
-        menuItemBuscarPersona.setMnemonic('a');
-        menuItemBuscarPersona.setText("Buscar");
-        menuPersona.add(menuItemBuscarPersona);
 
         menuItemEliminarPersona.setMnemonic('x');
         menuItemEliminarPersona.setText("Eliminar");
@@ -95,13 +112,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemCrearOperadora.setText("Crear");
         menuOperadora.add(menuItemCrearOperadora);
 
-        menuItemActualizarOperadora.setMnemonic('y');
-        menuItemActualizarOperadora.setText("Actualizar");
-        menuOperadora.add(menuItemActualizarOperadora);
-
         menuItemBuscarOperadora.setMnemonic('p');
         menuItemBuscarOperadora.setText("Buscar");
         menuOperadora.add(menuItemBuscarOperadora);
+
+        menuItemActualizarOperadora.setMnemonic('y');
+        menuItemActualizarOperadora.setText("Actualizar");
+        menuOperadora.add(menuItemActualizarOperadora);
 
         menuItemEliminarOperadora.setMnemonic('d');
         menuItemEliminarOperadora.setText("Eliminar");
@@ -119,12 +136,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemCrearTelefono.setText("Crear");
         menuTelefono.add(menuItemCrearTelefono);
 
+        menuItemBuscarTelefono.setText("Buscar");
+        menuTelefono.add(menuItemBuscarTelefono);
+
         menuItemActualizarTelefono.setMnemonic('a');
         menuItemActualizarTelefono.setText("Actualizar");
         menuTelefono.add(menuItemActualizarTelefono);
-
-        menuItemBuscarTelefono.setText("Buscar");
-        menuTelefono.add(menuItemBuscarTelefono);
 
         menuItemEliminarTelefono.setText("Eliminar");
         menuTelefono.add(menuItemEliminarTelefono);
@@ -154,12 +171,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
         );
 
         pack();
@@ -171,12 +188,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void menuItemCrearPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCrearPersonaActionPerformed
         if (ventanaCrearPersona == null) {
-            ventanaCrearPersona = new VentanaCrearPersona();
+            ventanaCrearPersona = new VentanaCrearPersona(personaControlador);
             desktopPane.add(ventanaCrearPersona);
         }
         
         ventanaCrearPersona.setVisible(true);
     }//GEN-LAST:event_menuItemCrearPersonaActionPerformed
+
+    private void menuItemBuscarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBuscarPersonaActionPerformed
+        if (ventanaBuscarPersona == null) {
+            ventanaBuscarPersona = new VentanaBuscarPersona(personaControlador);
+            desktopPane.add(ventanaBuscarPersona);
+        }
+        
+        ventanaBuscarPersona.setVisible(true);
+    }//GEN-LAST:event_menuItemBuscarPersonaActionPerformed
 
     /**
      * @param args the command line arguments

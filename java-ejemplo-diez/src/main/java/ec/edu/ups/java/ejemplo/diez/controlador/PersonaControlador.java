@@ -6,7 +6,6 @@ package ec.edu.ups.java.ejemplo.diez.controlador;
 
 import ec.edu.ups.java.ejemplo.diez.idao.IPersonaDAO;
 import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
-import java.util.GregorianCalendar;
 
 /**
  *
@@ -23,6 +22,11 @@ public class PersonaControlador {
     public void crear(Persona persona){
         this.persona = persona;
         personaDAO.create(persona);
+    }
+    
+    public Persona buscar(String cedula){
+        this.persona = personaDAO.read(cedula);
+        return this.persona;
     }
                 
 }
