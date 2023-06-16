@@ -11,9 +11,6 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="internalFrameClosing" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameClosing"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -54,7 +51,7 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Actualizar Persona">
+            <TitledBorder title="Eliminar Persona">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
               </Border>
@@ -67,7 +64,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
@@ -98,7 +95,7 @@
                           <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="263" max="32767" attributes="0"/>
+                  <EmptySpace pref="333" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -128,7 +125,7 @@
                       <Component id="btnCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="77" max="32767" attributes="0"/>
+                  <EmptySpace pref="147" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

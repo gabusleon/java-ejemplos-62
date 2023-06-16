@@ -37,5 +37,14 @@ public class PersonaControlador {
         }
         return false;
     }
+    
+    public boolean eliminar(String cedula){
+        Persona personaEncontrada = this.buscar(cedula);
+        if(personaEncontrada != null){
+            personaDAO.delete(cedula);
+            return true;
+        }
+        return false;
+    }
                 
 }

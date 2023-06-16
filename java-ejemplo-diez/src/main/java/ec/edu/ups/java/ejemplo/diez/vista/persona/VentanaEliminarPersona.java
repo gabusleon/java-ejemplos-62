@@ -1,31 +1,25 @@
-package ec.edu.ups.java.ejemplo.diez.vista.persona;
-
-
-import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
-import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import javax.swing.JOptionPane;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
+package ec.edu.ups.java.ejemplo.diez.vista.persona;
+
+import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
+import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author PhD. Gabriel A. León Paredes
  */
-public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
+public class VentanaEliminarPersona extends javax.swing.JInternalFrame {
 
     private PersonaControlador personaControlador;
-    
     /**
-     * Creates new form VentanaActualizarPersona
+     * Creates new form VentanaEliminarPersona
      */
-    public VentanaActualizarPersona(PersonaControlador personaControlador) {
+    public VentanaEliminarPersona(PersonaControlador personaControlador) {
         initComponents();
         this.personaControlador = personaControlador;
     }
@@ -55,26 +49,9 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameClosing(evt);
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Actualizar Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Eliminar Persona", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 14))); // NOI18N
 
         label1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         label1.setText("Cedula");
@@ -150,7 +127,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
                         .addComponent(btnAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar)))
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addContainerGap(333, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +150,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar)
                     .addComponent(btnAceptar))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -197,8 +174,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.limpiarCampos();
-        this.cambiarEstadoCampos(false);
+        this.limpiarCampos();        
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -209,8 +185,7 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
             txtNombre.setText(personita.getNombre());
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String fechaNacimiento = format.format(personita.getFechaNacimiento().getTime());
-            txtFechaNacimiento.setText(fechaNacimiento);
-            this.cambiarEstadoCampos(true);
+            txtFechaNacimiento.setText(fechaNacimiento);            
         } else {
             JOptionPane.showMessageDialog(this, "La persona con cedula " + cedula + " no ha sido encontrada!");
         }
@@ -218,49 +193,24 @@ public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String cedula = txtCedula.getText();
-        String nombre = txtNombre.getText();
-        String fechaNacimiento = txtFechaNacimiento.getText();
-        
-        Date fechaUno;
-        GregorianCalendar fechaFinal = new GregorianCalendar();
-        
-        try {
-            fechaUno = new SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento);            
-            fechaFinal.setTime(fechaUno);
-        } catch (ParseException ex) {
-            System.out.println("Error: no se pudo convertir la fecha");
+
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Estas seguro que deseas eliminar la persona?");
+        if(respuesta == JOptionPane.YES_OPTION){
+            if(personaControlador.eliminar(cedula)){
+                JOptionPane.showMessageDialog(this, "La persona ha sido eliminada exitosamente! :)");
+                this.limpiarCampos();                
+            }else{
+                JOptionPane.showMessageDialog(this, "La persona no ha sido eliminada! :(");
+            }
         }
-                
-        Persona personita = new Persona();
-        personita.setCedula(cedula);
-        personita.setNombre(nombre);
-        personita.setFechaNacimiento(fechaFinal);
-        
-        if(personaControlador.actualizar(personita)){
-            JOptionPane.showMessageDialog(this, "La persona ha sido actualizada exitosamente! :)");
-            this.limpiarCampos();   
-            this.cambiarEstadoCampos(false);
-        }else{
-            JOptionPane.showMessageDialog(this, "La persona no ha sido actualizada! :(");
-        }
-        
+
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
-        this.limpiarCampos();
-        this.cambiarEstadoCampos(false);
-    }//GEN-LAST:event_formInternalFrameClosing
-
+    
      private void limpiarCampos() {
         this.txtCedula.setText("");
         this.txtNombre.setText("");
         this.txtFechaNacimiento.setText("");
-    }
-     
-    private void cambiarEstadoCampos(boolean estado){
-        this.txtCedula.setEnabled(!estado);
-        this.txtNombre.setEnabled(estado);
-        this.txtFechaNacimiento.setEnabled(estado);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
