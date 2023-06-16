@@ -28,5 +28,14 @@ public class PersonaControlador {
         this.persona = personaDAO.read(cedula);
         return this.persona;
     }
+    
+    public boolean actualizar(Persona persona){
+        Persona personaEncontrada = this.buscar(persona.getCedula());
+        if(personaEncontrada != null){
+            personaDAO.update(persona);
+            return true;
+        }
+        return false;
+    }
                 
 }

@@ -1,26 +1,31 @@
+package ec.edu.ups.java.ejemplo.diez.vista.persona;
+
+
+import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
+import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package ec.edu.ups.java.ejemplo.diez.vista;
-
-import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
-import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
-import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author PhD. Gabriel A. León Paredes
  */
-public class VentanaBuscarPersona extends javax.swing.JInternalFrame {
+public class VentanaActualizarPersona extends javax.swing.JInternalFrame {
 
     private PersonaControlador personaControlador;
-
+    
     /**
-     * Creates new form VentanaBuscarPersona
+     * Creates new form VentanaActualizarPersona
      */
-    public VentanaBuscarPersona(PersonaControlador personaControlador) {
+    public VentanaActualizarPersona(PersonaControlador personaControlador) {
         initComponents();
         this.personaControlador = personaControlador;
     }
@@ -43,8 +48,10 @@ public class VentanaBuscarPersona extends javax.swing.JInternalFrame {
         txtFechaNacimiento = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -109,32 +116,40 @@ public class VentanaBuscarPersona extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(70, 70, 70)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(37, 37, 37)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnBuscar))
-                                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(269, 269, 269)
-                        .addComponent(btnCancelar)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnBuscar))
+                            .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(71, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAceptar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancelar)
+                .addGap(170, 170, 170))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,9 +168,11 @@ public class VentanaBuscarPersona extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(btnCancelar)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar)
+                    .addComponent(btnAceptar))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,6 +195,12 @@ public class VentanaBuscarPersona extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.limpiarCampos();
+        this.cambiarEstadoCampos(false);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = txtCedula.getText();
         Persona personita = personaControlador.buscar(cedula);
@@ -186,28 +209,61 @@ public class VentanaBuscarPersona extends javax.swing.JInternalFrame {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String fechaNacimiento = format.format(personita.getFechaNacimiento().getTime());
             txtFechaNacimiento.setText(fechaNacimiento);
+            this.cambiarEstadoCampos(true);
         } else {
             JOptionPane.showMessageDialog(this, "La persona con cedula " + cedula + " no ha sido encontrada!");
         }
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.limpiarCampos();
-        this.setVisible(false);
-    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        String cedula = txtCedula.getText();
+        String nombre = txtNombre.getText();
+        String fechaNacimiento = txtFechaNacimiento.getText();
+        
+        Date fechaUno;
+        GregorianCalendar fechaFinal = new GregorianCalendar();
+        
+        try {
+            fechaUno = new SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento);            
+            fechaFinal.setTime(fechaUno);
+        } catch (ParseException ex) {
+            System.out.println("Error: no se pudo convertir la fecha");
+        }
+                
+        Persona personita = new Persona();
+        personita.setCedula(cedula);
+        personita.setNombre(nombre);
+        personita.setFechaNacimiento(fechaFinal);
+        
+        if(personaControlador.actualizar(personita)){
+            JOptionPane.showMessageDialog(this, "La persona ha sido actualizada exitosamente! :)");
+            this.limpiarCampos();   
+            this.cambiarEstadoCampos(false);
+        }else{
+            JOptionPane.showMessageDialog(this, "La persona no ha sido actualizada! :(");
+        }
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void formInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosing
         this.limpiarCampos();
+        this.cambiarEstadoCampos(false);
     }//GEN-LAST:event_formInternalFrameClosing
 
-    private void limpiarCampos() {
+     private void limpiarCampos() {
         this.txtCedula.setText("");
         this.txtNombre.setText("");
         this.txtFechaNacimiento.setText("");
     }
+     
+    private void cambiarEstadoCampos(boolean estado){
+        this.txtCedula.setEnabled(!estado);
+        this.txtNombre.setEnabled(estado);
+        this.txtFechaNacimiento.setEnabled(estado);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel jPanel1;

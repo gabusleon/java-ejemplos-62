@@ -4,9 +4,12 @@
  */
 package ec.edu.ups.java.ejemplo.diez.vista;
 
+import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaBuscarPersona;
+import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaCrearPersona;
 import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
 import ec.edu.ups.java.ejemplo.diez.dao.PersonaDAO;
 import ec.edu.ups.java.ejemplo.diez.idao.IPersonaDAO;
+import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaActualizarPersona;
 
 /**
  *
@@ -16,7 +19,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     //ventanas
     private VentanaCrearPersona ventanaCrearPersona; 
-    private VentanaBuscarPersona ventanaBuscarPersona;
+    private VentanaBuscarPersona ventanaBuscarPersona;    
+    private VentanaActualizarPersona ventanaActualizarPersona;
     //controladores
     private PersonaControlador personaControlador;
     //DAOs
@@ -94,6 +98,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemActualizarPersona.setMnemonic('s');
         menuItemActualizarPersona.setText("Actualizar");
+        menuItemActualizarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemActualizarPersonaActionPerformed(evt);
+            }
+        });
         menuPersona.add(menuItemActualizarPersona);
 
         menuItemEliminarPersona.setMnemonic('x');
@@ -203,6 +212,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         ventanaBuscarPersona.setVisible(true);
     }//GEN-LAST:event_menuItemBuscarPersonaActionPerformed
+
+    private void menuItemActualizarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarPersonaActionPerformed
+        if (ventanaActualizarPersona == null) {
+            ventanaActualizarPersona = new VentanaActualizarPersona(personaControlador);
+            desktopPane.add(ventanaActualizarPersona);
+        }
+        
+        ventanaActualizarPersona.setVisible(true);
+    }//GEN-LAST:event_menuItemActualizarPersonaActionPerformed
 
     /**
      * @param args the command line arguments
