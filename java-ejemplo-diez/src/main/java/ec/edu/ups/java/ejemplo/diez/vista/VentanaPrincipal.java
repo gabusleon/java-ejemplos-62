@@ -11,6 +11,7 @@ import ec.edu.ups.java.ejemplo.diez.dao.PersonaDAO;
 import ec.edu.ups.java.ejemplo.diez.idao.IPersonaDAO;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaActualizarPersona;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaEliminarPersona;
+import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaListarPersona;
 
 /**
  *
@@ -23,6 +24,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaBuscarPersona ventanaBuscarPersona;    
     private VentanaActualizarPersona ventanaActualizarPersona;
     private VentanaEliminarPersona ventanaEliminarPersona;
+    private VentanaListarPersona ventanaListarPersona;
     //controladores
     private PersonaControlador personaControlador;
     //DAOs
@@ -117,6 +119,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuPersona.add(menuItemEliminarPersona);
 
         menuItemListarPersona.setText("Listar");
+        menuItemListarPersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemListarPersonaActionPerformed(evt);
+            }
+        });
         menuPersona.add(menuItemListarPersona);
 
         menuBar.add(menuPersona);
@@ -237,6 +244,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         ventanaEliminarPersona.setVisible(true);
     }//GEN-LAST:event_menuItemEliminarPersonaActionPerformed
+
+    private void menuItemListarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListarPersonaActionPerformed
+         if (ventanaListarPersona == null) {
+            ventanaListarPersona = new VentanaListarPersona(personaControlador);
+            desktopPane.add(ventanaListarPersona);
+        }
+        
+        ventanaListarPersona.setVisible(true);
+    }//GEN-LAST:event_menuItemListarPersonaActionPerformed
 
     /**
      * @param args the command line arguments

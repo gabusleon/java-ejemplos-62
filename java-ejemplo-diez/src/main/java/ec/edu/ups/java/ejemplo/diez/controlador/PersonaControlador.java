@@ -6,6 +6,7 @@ package ec.edu.ups.java.ejemplo.diez.controlador;
 
 import ec.edu.ups.java.ejemplo.diez.idao.IPersonaDAO;
 import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
+import java.util.List;
 
 /**
  *
@@ -45,6 +46,10 @@ public class PersonaControlador {
             return true;
         }
         return false;
+    }
+    
+    public List<Persona> listar(){
+        return personaDAO.list();
     }
                 
 }
