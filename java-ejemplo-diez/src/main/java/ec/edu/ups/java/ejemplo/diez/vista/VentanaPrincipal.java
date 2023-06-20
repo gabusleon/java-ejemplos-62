@@ -4,11 +4,19 @@
  */
 package ec.edu.ups.java.ejemplo.diez.vista;
 
+import ec.edu.ups.java.ejemplo.diez.controlador.OperadoraControlador;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaBuscarPersona;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaCrearPersona;
 import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
+import ec.edu.ups.java.ejemplo.diez.dao.OperadoraDAO;
 import ec.edu.ups.java.ejemplo.diez.dao.PersonaDAO;
+import ec.edu.ups.java.ejemplo.diez.idao.IOperadoraDAO;
 import ec.edu.ups.java.ejemplo.diez.idao.IPersonaDAO;
+import ec.edu.ups.java.ejemplo.diez.vista.operadora.VentanaActualizarOperadora;
+import ec.edu.ups.java.ejemplo.diez.vista.operadora.VentanaBuscarOperadora;
+import ec.edu.ups.java.ejemplo.diez.vista.operadora.VentanaCrearOperadora;
+import ec.edu.ups.java.ejemplo.diez.vista.operadora.VentanaEliminarOperadora;
+import ec.edu.ups.java.ejemplo.diez.vista.operadora.VentanaListarOperadora;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaActualizarPersona;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaEliminarPersona;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaListarPersona;
@@ -19,16 +27,24 @@ import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaListarPersona;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    //ventanas
-    private VentanaCrearPersona ventanaCrearPersona; 
-    private VentanaBuscarPersona ventanaBuscarPersona;    
+    //ventanas personas
+    private VentanaCrearPersona ventanaCrearPersona;
+    private VentanaBuscarPersona ventanaBuscarPersona;
     private VentanaActualizarPersona ventanaActualizarPersona;
     private VentanaEliminarPersona ventanaEliminarPersona;
     private VentanaListarPersona ventanaListarPersona;
+    //ventanas operadora
+    private VentanaCrearOperadora ventanaCrearOperadora;
+    private VentanaBuscarOperadora ventanaBuscarOperadora;
+    private VentanaActualizarOperadora ventanaActualizarOperadora;
+    private VentanaEliminarOperadora ventanaEliminarOperadora;
+    private VentanaListarOperadora ventanaListarOperadora;
     //controladores
     private PersonaControlador personaControlador;
+    private OperadoraControlador operadoraControlador;
     //DAOs
     private IPersonaDAO personaDAO;
+    private IOperadoraDAO operadoraDAO;
 
     /**
      * Creates new form VentanaPrincipal
@@ -37,6 +53,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         initComponents();
         personaDAO = new PersonaDAO();
         personaControlador = new PersonaControlador(personaDAO);
+        operadoraDAO = new OperadoraDAO();
+        operadoraControlador = new OperadoraControlador(operadoraDAO);
     }
 
     /**
@@ -133,21 +151,46 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemCrearOperadora.setMnemonic('t');
         menuItemCrearOperadora.setText("Crear");
+        menuItemCrearOperadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCrearOperadoraActionPerformed(evt);
+            }
+        });
         menuOperadora.add(menuItemCrearOperadora);
 
         menuItemBuscarOperadora.setMnemonic('p');
         menuItemBuscarOperadora.setText("Buscar");
+        menuItemBuscarOperadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemBuscarOperadoraActionPerformed(evt);
+            }
+        });
         menuOperadora.add(menuItemBuscarOperadora);
 
         menuItemActualizarOperadora.setMnemonic('y');
         menuItemActualizarOperadora.setText("Actualizar");
+        menuItemActualizarOperadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemActualizarOperadoraActionPerformed(evt);
+            }
+        });
         menuOperadora.add(menuItemActualizarOperadora);
 
         menuItemEliminarOperadora.setMnemonic('d');
         menuItemEliminarOperadora.setText("Eliminar");
+        menuItemEliminarOperadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemEliminarOperadoraActionPerformed(evt);
+            }
+        });
         menuOperadora.add(menuItemEliminarOperadora);
 
         menuItemListarOperadora.setText("Listar");
+        menuItemListarOperadora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemListarOperadoraActionPerformed(evt);
+            }
+        });
         menuOperadora.add(menuItemListarOperadora);
 
         menuBar.add(menuOperadora);
@@ -214,7 +257,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaCrearPersona = new VentanaCrearPersona(personaControlador);
             desktopPane.add(ventanaCrearPersona);
         }
-        
+
         ventanaCrearPersona.setVisible(true);
     }//GEN-LAST:event_menuItemCrearPersonaActionPerformed
 
@@ -223,7 +266,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaBuscarPersona = new VentanaBuscarPersona(personaControlador);
             desktopPane.add(ventanaBuscarPersona);
         }
-        
+
         ventanaBuscarPersona.setVisible(true);
     }//GEN-LAST:event_menuItemBuscarPersonaActionPerformed
 
@@ -232,7 +275,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaActualizarPersona = new VentanaActualizarPersona(personaControlador);
             desktopPane.add(ventanaActualizarPersona);
         }
-        
+
         ventanaActualizarPersona.setVisible(true);
     }//GEN-LAST:event_menuItemActualizarPersonaActionPerformed
 
@@ -241,18 +284,63 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaEliminarPersona = new VentanaEliminarPersona(personaControlador);
             desktopPane.add(ventanaEliminarPersona);
         }
-        
+
         ventanaEliminarPersona.setVisible(true);
     }//GEN-LAST:event_menuItemEliminarPersonaActionPerformed
 
     private void menuItemListarPersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListarPersonaActionPerformed
-         if (ventanaListarPersona == null) {
+        if (ventanaListarPersona == null) {
             ventanaListarPersona = new VentanaListarPersona(personaControlador);
             desktopPane.add(ventanaListarPersona);
         }
-        
+
         ventanaListarPersona.setVisible(true);
     }//GEN-LAST:event_menuItemListarPersonaActionPerformed
+
+    private void menuItemCrearOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCrearOperadoraActionPerformed
+        if (ventanaCrearOperadora == null) {
+            ventanaCrearOperadora = new VentanaCrearOperadora(operadoraControlador);
+            desktopPane.add(ventanaCrearOperadora);
+        }
+
+        ventanaCrearOperadora.setVisible(true);
+    }//GEN-LAST:event_menuItemCrearOperadoraActionPerformed
+
+    private void menuItemBuscarOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemBuscarOperadoraActionPerformed
+        if (ventanaBuscarOperadora == null) {
+            ventanaBuscarOperadora = new VentanaBuscarOperadora(operadoraControlador);
+            desktopPane.add(ventanaBuscarOperadora);
+        }
+
+        ventanaBuscarOperadora.setVisible(true);
+    }//GEN-LAST:event_menuItemBuscarOperadoraActionPerformed
+
+    private void menuItemActualizarOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarOperadoraActionPerformed
+         if (ventanaActualizarOperadora == null) {
+            ventanaActualizarOperadora = new VentanaActualizarOperadora(operadoraControlador);
+            desktopPane.add(ventanaActualizarOperadora);
+        }
+
+        ventanaActualizarOperadora.setVisible(true);
+    }//GEN-LAST:event_menuItemActualizarOperadoraActionPerformed
+
+    private void menuItemEliminarOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEliminarOperadoraActionPerformed
+        if (ventanaEliminarOperadora == null) {
+            ventanaEliminarOperadora = new VentanaEliminarOperadora(operadoraControlador);
+            desktopPane.add(ventanaEliminarOperadora);
+        }
+
+        ventanaEliminarOperadora.setVisible(true);
+    }//GEN-LAST:event_menuItemEliminarOperadoraActionPerformed
+
+    private void menuItemListarOperadoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListarOperadoraActionPerformed
+        if (ventanaListarOperadora == null) {
+            ventanaListarOperadora = new VentanaListarOperadora(operadoraControlador);
+            desktopPane.add(ventanaListarOperadora);
+        }
+
+        ventanaListarOperadora.setVisible(true);
+    }//GEN-LAST:event_menuItemListarOperadoraActionPerformed
 
     /**
      * @param args the command line arguments

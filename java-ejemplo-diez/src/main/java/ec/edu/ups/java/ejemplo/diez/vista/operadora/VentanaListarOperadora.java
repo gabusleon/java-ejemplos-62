@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
-package ec.edu.ups.java.ejemplo.diez.vista.persona;
+package ec.edu.ups.java.ejemplo.diez.vista.operadora;
 
-import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
-import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
-import java.text.SimpleDateFormat;
+import ec.edu.ups.java.ejemplo.diez.controlador.OperadoraControlador;
+import ec.edu.ups.java.ejemplo.diez.modelo.Operadora;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,16 +13,16 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author PhD. Gabriel A. León Paredes
  */
-public class VentanaListarPersona extends javax.swing.JInternalFrame {
+public class VentanaListarOperadora extends javax.swing.JInternalFrame {
 
-    private PersonaControlador personaControlador;
+    private OperadoraControlador operadoraControlador;
 
     /**
      * Creates new form VentanaListarPersona
      */
-    public VentanaListarPersona(PersonaControlador personaControlador) {
+    public VentanaListarOperadora(OperadoraControlador operadoraControlador) {
         initComponents();
-        this.personaControlador = personaControlador;
+        this.operadoraControlador = operadoraControlador;
     }
 
     /**
@@ -37,7 +36,7 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPersonas = new javax.swing.JTable();
+        tblOperadoras = new javax.swing.JTable();
         btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
@@ -60,30 +59,29 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
             }
         });
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Listar Personas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Listar Operadoras", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 14))); // NOI18N
 
-        tblPersonas.setModel(new javax.swing.table.DefaultTableModel(
+        tblOperadoras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cedula", "Nombre", "Fecha de Nacimiento"
+                "Codigo", "Nombre"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblPersonas);
+        jScrollPane1.setViewportView(tblOperadoras);
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +101,7 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar)
-                .addGap(294, 294, 294))
+                .addGap(316, 316, 316))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,36 +133,31 @@ public class VentanaListarPersona extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        
-    }//GEN-LAST:event_formInternalFrameOpened
-
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
         this.cargarDatosTabla();
     }//GEN-LAST:event_formInternalFrameActivated
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-           this.setEnabled(false);
+        this.setEnabled(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cargarDatosTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) this.tblPersonas.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) this.tblOperadoras.getModel();
         modelo.setNumRows(0);
-        List<Persona> listaPersonas = personaControlador.listar();
-        for (Persona persona : listaPersonas) {
-            String cedula = persona.getCedula();
-            String nombre = persona.getNombre();
-            String fechaNacimiento = new SimpleDateFormat("dd/MM/yyyy").format(persona.getFechaNacimiento().getTime());
-            Object[] rowData = {cedula, nombre, fechaNacimiento};
+        List<Operadora> listaOperadoras = operadoraControlador.listar();
+        for (Operadora operadora : listaOperadoras) {
+            int codigo = operadora.getCodigo();
+            String nombre = operadora.getNombre();            
+            Object[] rowData = {codigo, nombre};
             modelo.addRow(rowData);
         }
-        this.tblPersonas.setModel(modelo);
+        this.tblOperadoras.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblPersonas;
+    private javax.swing.JTable tblOperadoras;
     // End of variables declaration//GEN-END:variables
 }

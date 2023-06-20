@@ -81,29 +81,44 @@
                 <Property name="mnemonic" type="int" value="116"/>
                 <Property name="text" type="java.lang.String" value="Crear"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemCrearOperadoraActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemBuscarOperadora">
               <Properties>
                 <Property name="mnemonic" type="int" value="112"/>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemBuscarOperadoraActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemActualizarOperadora">
               <Properties>
                 <Property name="mnemonic" type="int" value="121"/>
                 <Property name="text" type="java.lang.String" value="Actualizar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemActualizarOperadoraActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemEliminarOperadora">
               <Properties>
                 <Property name="mnemonic" type="int" value="100"/>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemEliminarOperadoraActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemListarOperadora">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Listar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemListarOperadoraActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
