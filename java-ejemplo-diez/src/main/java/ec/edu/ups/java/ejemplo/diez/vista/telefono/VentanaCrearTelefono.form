@@ -5,9 +5,20 @@
     <Component class="javax.swing.ButtonGroup" name="buttonGroupTipoTelefono">
     </Component>
   </NonVisualComponents>
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="defaultCloseOperation" type="int" value="1"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+    <Property name="title" type="java.lang.String" value="Ingresar nuevo Telefono"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="internalFrameActivated" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameActivated"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -105,7 +116,7 @@
                           <Component id="radioButtonTrabajo" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="cbxOperadora" min="-2" pref="201" max="-2" attributes="0"/>
-                      <Component id="txtNumero1" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                      <Component id="txtNumero" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -117,7 +128,7 @@
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNumero1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNumero" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -155,7 +166,7 @@
             <Property name="text" type="java.lang.String" value="Tipo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNumero1">
+        <Component class="javax.swing.JTextField" name="txtNumero">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Helvetica Neue" size="12" style="1"/>
@@ -192,6 +203,7 @@
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="buttonGroupTipoTelefono"/>
             </Property>
+            <Property name="selected" type="boolean" value="true"/>
             <Property name="text" type="java.lang.String" value="Casa"/>
           </Properties>
         </Component>

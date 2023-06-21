@@ -64,7 +64,7 @@ public class Operadora {
 
     @Override
     public String toString() {
-        return "Operadora{" + "codigo=" + codigo + ", nombre=" + nombre + '}';
+        return nombre;
     }            
     
 }

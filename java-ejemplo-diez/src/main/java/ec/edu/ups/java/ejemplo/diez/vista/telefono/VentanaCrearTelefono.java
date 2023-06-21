@@ -4,17 +4,40 @@
  */
 package ec.edu.ups.java.ejemplo.diez.vista.telefono;
 
+import ec.edu.ups.java.ejemplo.diez.controlador.OperadoraControlador;
+import ec.edu.ups.java.ejemplo.diez.controlador.PersonaControlador;
+import ec.edu.ups.java.ejemplo.diez.controlador.TelefonoControlador;
+import ec.edu.ups.java.ejemplo.diez.modelo.Operadora;
+import ec.edu.ups.java.ejemplo.diez.modelo.Persona;
+import ec.edu.ups.java.ejemplo.diez.modelo.Telefono;
+import ec.edu.ups.java.ejemplo.diez.modelo.TipoTelefono;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PhD. Gabriel A. León Paredes
  */
 public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
 
+    private PersonaControlador personaControlador;
+    private OperadoraControlador operadoraControlador;
+    private TelefonoControlador telefonoControlador;
+    
+    private Operadora operadoraSeleccionada;
+    private Persona personaSeleccionada;
     /**
      * Creates new form VentanaCrearTelefono
      */
-    public VentanaCrearTelefono() {
+    public VentanaCrearTelefono(PersonaControlador personaControlador, 
+            OperadoraControlador operadoraControlador,
+            TelefonoControlador telefonoControlador) {
         initComponents();
+        this.personaControlador = personaControlador;
+        this.operadoraControlador = operadoraControlador;
+        this.telefonoControlador = telefonoControlador;
     }
 
     /**
@@ -32,7 +55,7 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         label4 = new java.awt.Label();
         label5 = new java.awt.Label();
-        txtNumero1 = new javax.swing.JTextField();
+        txtNumero = new javax.swing.JTextField();
         label6 = new java.awt.Label();
         cbxOperadora = new javax.swing.JComboBox<>();
         radioButtonCasa = new javax.swing.JRadioButton();
@@ -46,6 +69,30 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         txtFechaNacimiento = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Ingresar nuevo Telefono");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -70,10 +117,10 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
         label5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         label5.setText("Tipo");
 
-        txtNumero1.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
-        txtNumero1.setForeground(new java.awt.Color(51, 102, 255));
-        txtNumero1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txtNumero1.setToolTipText("Ingrese la cedula de la nueva persona");
+        txtNumero.setFont(new java.awt.Font("Helvetica Neue", 1, 12)); // NOI18N
+        txtNumero.setForeground(new java.awt.Color(51, 102, 255));
+        txtNumero.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtNumero.setToolTipText("Ingrese la cedula de la nueva persona");
 
         label6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         label6.setText("Operadora");
@@ -81,6 +128,7 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
         cbxOperadora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione una operadora--" }));
 
         buttonGroupTipoTelefono.add(radioButtonCasa);
+        radioButtonCasa.setSelected(true);
         radioButtonCasa.setText("Casa");
 
         buttonGroupTipoTelefono.add(radioButtonCelular);
@@ -108,7 +156,7 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(radioButtonTrabajo))
                     .addComponent(cbxOperadora, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -117,7 +165,7 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumero1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,47 +289,91 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        String cedula = txtCedula.getText();
-        String nombre = txtTipo.getText();
-        String fechaNacimiento = txtFechaNacimiento.getText();
-        Date fechaUno;
-        GregorianCalendar fechaFinal = new GregorianCalendar();
+        
+        if(!camposObligatoriosConDatos()){
+            JOptionPane.showMessageDialog(this, "Los datos del telefono son obligatorios de llenar.");
+        }else{
+        
+            String numero = txtNumero.getText();
+            TipoTelefono tipo;
+            if(radioButtonCasa.isSelected()){
+                tipo = TipoTelefono.CASA;
+            }else if(radioButtonCelular.isSelected()){
+                tipo = TipoTelefono.CELULAR;
+            }else{
+                tipo = TipoTelefono.TRABAJO;
+            }
 
-        try {
-            fechaUno = new SimpleDateFormat("dd/MM/yyyy").parse(fechaNacimiento);
-            fechaFinal.setTime(fechaUno);
-        } catch (ParseException ex) {
-            System.out.println("Error: no se pudo convertir la fecha");
+            operadoraSeleccionada = (Operadora) cbxOperadora.getSelectedItem();
+            if(personaSeleccionada == null){
+                JOptionPane.showMessageDialog(this, "No ha buscado una persona.");
+            }else{
+                Telefono telefono = new Telefono(numero, tipo);
+                telefono.setUnaOperada(operadoraSeleccionada);
+                telefono.setUnaPersona(personaSeleccionada);
+
+                telefonoControlador.crear(telefono);
+
+                JOptionPane.showMessageDialog(this, "El telefono ha sido creado exitosamente! :)");
+                this.limpiarCamposTelefono();
+                this.limpiarCamposPersona();
+            }
         }
-
-        Persona personita = new Persona();
-        personita.setCedula(cedula);
-        personita.setNombre(nombre);
-        personita.setFechaNacimiento(fechaFinal);
-
-        personaControlador.crear(personita);
-        JOptionPane.showMessageDialog(this, "La persona ha sido creada exitosamente! :)");
-        this.limpiarCampos();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.limpiarCampos();
+        this.limpiarCamposTelefono();
+        this.limpiarCamposPersona();
         this.setVisible(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cedula = txtCedula.getText();
-        Persona personita = personaControlador.buscar(cedula);
-        if (personita != null) {
-            txtNombre.setText(personita.getNombre());
+        personaSeleccionada = personaControlador.buscar(cedula);
+        if (personaSeleccionada != null) {
+            txtNombre.setText(personaSeleccionada.getNombre());
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaNacimiento = format.format(personita.getFechaNacimiento().getTime());
+            String fechaNacimiento = format.format(personaSeleccionada.getFechaNacimiento().getTime());
             txtFechaNacimiento.setText(fechaNacimiento);
         } else {
             JOptionPane.showMessageDialog(this, "La persona con cedula " + cedula + " no ha sido encontrada!");
+            limpiarCamposPersona();
         }
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        cargarDatosOperadora();
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void cargarDatosOperadora(){
+        DefaultComboBoxModel<Operadora> modelo = (DefaultComboBoxModel) this.cbxOperadora.getModel();
+        List<Operadora> listaOperadoras = operadoraControlador.listar();
+        modelo.removeAllElements();
+        for(Operadora operadora : listaOperadoras){
+            modelo.addElement(operadora);
+        }        
+    }
+    
+     private void limpiarCamposPersona() {
+        this.txtCedula.setText("");
+        this.txtNombre.setText("");
+        this.txtFechaNacimiento.setText("");
+    }
+     
+     private void limpiarCamposTelefono() {
+        this.txtNumero.setText("");
+        this.cbxOperadora.setSelectedIndex(0);
+        this.radioButtonCasa.setSelected(true);
+    }
+     
+    private boolean camposObligatoriosConDatos(){
+        if(!this.txtNumero.getText().isEmpty() && this.cbxOperadora.getSelectedIndex() >= 0){
+            return true;
+        }else{
+            return false;
+        }
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
@@ -303,6 +395,6 @@ public class VentanaCrearTelefono extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNumero1;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }
