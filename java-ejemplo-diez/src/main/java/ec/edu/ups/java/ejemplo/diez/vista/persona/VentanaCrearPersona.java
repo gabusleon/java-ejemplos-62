@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 public class VentanaCrearPersona extends javax.swing.JInternalFrame {
 
     private PersonaControlador personaControlador;
+    private ResourceBundle mensajes;
     
     /**
      * Creates new form VentanaCrearPersona
@@ -28,6 +31,12 @@ public class VentanaCrearPersona extends javax.swing.JInternalFrame {
         this.personaControlador = personaControlador;
     }
 
+    public void cambiarIdioma(Locale localizacion){
+        mensajes = ResourceBundle.getBundle("mensajes.mensaje", localizacion);
+        label1.setText(mensajes.getString("txtCedula"));
+        label2.setText(mensajes.getString("txtNombre"));
+        label3.setText(mensajes.getString("txtFechaNacimiento"));        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

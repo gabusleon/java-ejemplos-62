@@ -25,6 +25,8 @@ import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaEliminarPersona;
 import ec.edu.ups.java.ejemplo.diez.vista.persona.VentanaListarPersona;
 import ec.edu.ups.java.ejemplo.diez.vista.telefono.VentanaBuscarTelefono;
 import ec.edu.ups.java.ejemplo.diez.vista.telefono.VentanaCrearTelefono;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -55,6 +57,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private IPersonaDAO personaDAO;
     private IOperadoraDAO operadoraDAO;
     private ITelefonoDAO telefonoDAO;
+    //Internacionalización
+    private Locale localizacion;
+    private ResourceBundle mensajes;
 
     /**
      * Creates new form VentanaPrincipal
@@ -67,8 +72,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         operadoraControlador = new OperadoraControlador(operadoraDAO);
         telefonoDAO = new TelefonoDAO();
         telefonoControlador = new TelefonoControlador(telefonoDAO);
+        localizacion = Locale.getDefault();                
+        cambiarIdioma();
     }
 
+    private void cambiarIdioma(){
+        mensajes = ResourceBundle.getBundle("mensajes.mensaje", localizacion);
+        menuPersona.setText(mensajes.getString("menu.persona"));
+        menuOperadora.setText(mensajes.getString("menu.operadora"));
+        menuTelefono.setText(mensajes.getString("menu.telefono"));
+        menuOpciones.setText(mensajes.getString("menu.opciones"));
+        menuIdiomas.setText(mensajes.getString("menu.idiomas"));
+        
+        if(ventanaCrearPersona != null){
+            ventanaCrearPersona.cambiarIdioma(localizacion);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +119,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemActualizarTelefono = new javax.swing.JMenuItem();
         menuItemEliminarTelefono = new javax.swing.JMenuItem();
         menuItemListarTelefono = new javax.swing.JMenuItem();
+        menuIdiomas = new javax.swing.JMenu();
+        menuItemEspanol = new javax.swing.JMenuItem();
+        menuItemIngles = new javax.swing.JMenuItem();
+        menuItemFRANCES = new javax.swing.JMenuItem();
         menuOpciones = new javax.swing.JMenu();
         menuItemSalirOpciones = new javax.swing.JMenuItem();
 
@@ -239,6 +262,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuBar.add(menuTelefono);
 
+        menuIdiomas.setText("Idiomas");
+
+        menuItemEspanol.setText("Español");
+        menuItemEspanol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemEspanolActionPerformed(evt);
+            }
+        });
+        menuIdiomas.add(menuItemEspanol);
+
+        menuItemIngles.setText("Inglés");
+        menuItemIngles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemInglesActionPerformed(evt);
+            }
+        });
+        menuIdiomas.add(menuItemIngles);
+
+        menuItemFRANCES.setText("Francés");
+        menuItemFRANCES.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemFRANCESActionPerformed(evt);
+            }
+        });
+        menuIdiomas.add(menuItemFRANCES);
+
+        menuBar.add(menuIdiomas);
+
         menuOpciones.setText("Opciones");
 
         menuItemSalirOpciones.setText("Salir");
@@ -279,7 +330,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaCrearPersona = new VentanaCrearPersona(personaControlador);
             desktopPane.add(ventanaCrearPersona);
         }
-
+        ventanaCrearPersona.cambiarIdioma(localizacion);
         ventanaCrearPersona.setVisible(true);
     }//GEN-LAST:event_menuItemCrearPersonaActionPerformed
 
@@ -383,6 +434,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaBuscarTelefono.setVisible(true);
     }//GEN-LAST:event_menuItemBuscarTelefonoActionPerformed
 
+    private void menuItemEspanolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEspanolActionPerformed
+        localizacion = new Locale("es", "EC");
+        cambiarIdioma();
+    }//GEN-LAST:event_menuItemEspanolActionPerformed
+
+    private void menuItemInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemInglesActionPerformed
+        localizacion = new Locale("en", "US");
+        cambiarIdioma();
+    }//GEN-LAST:event_menuItemInglesActionPerformed
+
+    private void menuItemFRANCESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemFRANCESActionPerformed
+        localizacion = new Locale("fr", "FR");
+        cambiarIdioma();
+    }//GEN-LAST:event_menuItemFRANCESActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -423,6 +489,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuIdiomas;
     private javax.swing.JMenuItem menuItemActualizarOperadora;
     private javax.swing.JMenuItem menuItemActualizarPersona;
     private javax.swing.JMenuItem menuItemActualizarTelefono;
@@ -435,6 +502,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemEliminarOperadora;
     private javax.swing.JMenuItem menuItemEliminarPersona;
     private javax.swing.JMenuItem menuItemEliminarTelefono;
+    private javax.swing.JMenuItem menuItemEspanol;
+    private javax.swing.JMenuItem menuItemFRANCES;
+    private javax.swing.JMenuItem menuItemIngles;
     private javax.swing.JMenuItem menuItemListarOperadora;
     private javax.swing.JMenuItem menuItemListarPersona;
     private javax.swing.JMenuItem menuItemListarTelefono;
