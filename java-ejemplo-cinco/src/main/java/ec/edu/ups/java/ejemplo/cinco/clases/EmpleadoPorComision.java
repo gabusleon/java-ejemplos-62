@@ -4,11 +4,13 @@
  */
 package ec.edu.ups.java.ejemplo.cinco.clases;
 
+import ec.edu.ups.java.ejemplo.cinco.interfaces.IMarcacionEmpleado;
+
 /**
  *
  * @author Gabus
  */
-public class EmpleadoPorComision extends Empleado {
+public class EmpleadoPorComision extends Empleado implements IMarcacionEmpleado{
 
     private double totalDeVentas;
     private double porcentajeComision;
@@ -56,6 +58,22 @@ public class EmpleadoPorComision extends Empleado {
     @Override
     public String toString() {
         return super.toString() + "\nEmpleadoPorComision{" + "totalDeVentas=" + totalDeVentas + ", porcentajeComision=" + porcentajeComision + ", salario=" + salario + '}';
+    }
+
+    @Override
+    public void registrarEntrada() {
+        System.out.println("Ha llegado tarde! No lo vuelva a repetir.");
+    }
+
+    @Override
+    public void registrarSalida() {
+        System.out.println("Ha salido muy pronto! No lo vuelva a repetir.");
+    }
+
+    @Override
+    public int visualizarAtrasos() {
+        System.out.println("Deberíamos despedirlo");
+        return 40;
     }
     
     

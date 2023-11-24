@@ -4,11 +4,13 @@
  */
 package ec.edu.ups.java.ejemplo.cinco.clases;
 
+import ec.edu.ups.java.ejemplo.cinco.interfaces.IMarcacionEmpleado;
+
 /**
  *
  * @author Gabus
  */
-public class EmpleadoAsalariado extends Empleado {
+public class EmpleadoAsalariado extends Empleado implements IMarcacionEmpleado {
 
     private int aniosAntiguedad;
     private double salario;
@@ -83,6 +85,22 @@ public class EmpleadoAsalariado extends Empleado {
     @Override
     public String toString() {
         return super.toString() + "\nEmpleadoAsalariado{" + "aniosAntiguedad=" + aniosAntiguedad + ", salario=" + salario + ", cargasFamiliares=" + cargasFamiliares + '}';
+    }
+
+    @Override
+    public void registrarEntrada() {
+        System.out.println("Se ha registro su entrada correctamente!");
+    }
+
+    @Override
+    public void registrarSalida() {
+        System.out.println("Se ha registrado su salida correctamente!");
+    }
+
+    @Override
+    public int visualizarAtrasos() {
+        System.out.println("Ud es un empleado ejemplar! y no tiene atrasos");
+        return 0;
     }
        
     

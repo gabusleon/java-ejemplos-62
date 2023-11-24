@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Gabus
  */
-public class Empleado {
+public abstract class Empleado {
     String cedula;
     private String nombre;
     private String apellido;
@@ -19,6 +19,7 @@ public class Empleado {
     private String telefono;
     private String direccion;
     protected String cargo;
+    public static int numeroDeEmpleados;
     
     public Empleado() {
     }
@@ -107,37 +108,41 @@ public class Empleado {
         this.cargo = cargo;
     }
     
-    public double calcularSalario(){
-        return 0.00;
+    public abstract double calcularSalario();
+    
+    public void aumentarNumeroDeEmpleados(){
+        numeroDeEmpleados++;
+    }
+    
+    public static int calcularMulta(int horasAtrasadas){
+        return horasAtrasadas * 3;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.cedula);
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.cedula);
         return hash;
     }
 
-    
+
     @Override
-    public boolean equals(Object obj) {        
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
         if (obj == null) {
             return false;
         }
-        //if (this.getClass() != obj.getClass()) {
-        //    return false;
-        //}
-        if(!(obj instanceof EmpleadoAsalariado) && 
-                !(obj instanceof EmpleadoPorComision) &&
-                !(obj instanceof EmpleadoPorHoras) ){
+        if (getClass() != obj.getClass()) {
             return false;
         }
-        final Empleado other = (Empleado) obj;        
-        if(!this.cedula.equals(other.cedula))
-            return false;
-        
-        return true;
+        final Empleado other = (Empleado) obj;
+        return Objects.equals(this.cedula, other.cedula);
     }
+
+    
+  
 
     
     
